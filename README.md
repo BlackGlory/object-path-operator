@@ -37,8 +37,8 @@ const obj = {
   key: ['value']
 }
 
-getProp(obj, ['key', 0]) // value
-getProp(obj, ['key-does-not-exist']) // undefined
+tryGetProp(obj, ['key', 0]) // value
+tryGetProp(obj, ['key-does-not-exist']) // undefined
 ```
 
 ### setProp
@@ -76,9 +76,9 @@ const obj = {
   key: ['value']
 }
 
-setProp(obj, ['key', 0], 'new-value') // true
-setProp(obj, ['newKey'], 'new-value') // true
-setProp(obj, ['path', 'does', 'not', 'exist'], 'new-value') // false
+trySetProp(obj, ['key', 0], 'new-value') // true
+trySetProp(obj, ['newKey'], 'new-value') // true
+trySetProp(obj, ['path', 'does', 'not', 'exist'], 'new-value') // false
 ```
 
 ### removeProp
@@ -107,6 +107,6 @@ const obj = {
   key: ['value']
 }
 
-removeProp(obj, ['key', 0]) // true
-removeProp(obj, ['key-does-not-exist']) // false
+tryRemoveProp(obj, ['key', 0]) // true
+tryRemoveProp(obj, ['key-does-not-exist']) // false
 ```
