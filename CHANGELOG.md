@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/BlackGlory/object-path-operator/compare/v4.0.1...v5.0.0) (2021-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* rewrite
+
+### Features
+
+* rewrite ([fc7fc1a](https://github.com/BlackGlory/object-path-operator/commit/fc7fc1ab894b686672c4cacf2ea35e30c3a3515f))
+
 ### [4.0.1](https://github.com/BlackGlory/object-path-operator/compare/v4.0.0...v4.0.1) (2021-11-19)
 
 ## 4.0.0 (2021-11-19)
