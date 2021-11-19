@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 4.0.0 (2021-11-19)
+
+
+### Features
+
+* init ([aa9fc7b](https://github.com/BlackGlory/object-path-operator/commit/aa9fc7b7ef3740f9bc0193896029cc0aaf87f87a))
+
 ## [3.0.0](https://github.com/BlackGlory/object-path-operator/compare/v2.0.0...v3.0.0) (2020-12-22)
 
 
