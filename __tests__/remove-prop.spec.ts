@@ -1,14 +1,13 @@
 import { removeProp } from '@src/remove-prop'
 import { getError } from 'return-style'
 
-describe('removeProp(obj: object, path: [PropertyKey, ...PropertyKey[]]): boolean', () => {
+describe('removeProp(obj: object, path: PropertyKey[]): boolean', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
         prop: 'value'
       }
 
-      // @ts-ignore
       const err = getError(() => removeProp(obj, []))
 
       expect(err).toBeInstanceOf(Error)

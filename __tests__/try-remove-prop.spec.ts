@@ -1,23 +1,17 @@
 import { tryRemoveProp } from '@src/try-remove-prop'
-import { getError } from 'return-style'
 
 describe(`
-  tryRemoveProp(
-    obj: object
-  , path: [PropertyKey, ...PropertyKey[]]
-  ): boolean
+  tryRemoveProp(obj: object, path: PropertyKey[]): boolean
 `, () => {
   describe('empty path', () => {
-    it('throws Error', () => {
+    it('return false', () => {
       const obj = {
         prop: 'value'
       }
 
-      // @ts-ignore
-      const err = getError(() => tryRemoveProp(obj, []))
+      const result = tryRemoveProp(obj, [])
 
-      expect(err).toBeInstanceOf(Error)
-      expect(err!.message).toBe('The parameter path cannot be empty')
+      expect(result).toBe(false)
     })
   })
 

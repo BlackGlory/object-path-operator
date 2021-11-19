@@ -1,24 +1,17 @@
 import { tryGetProp } from '@src/try-get-prop'
-import { getError } from 'return-style'
 
 describe(`
-  tryGetProp(
-    obj: object
-  , path: [PropertyKey, ...PropertyKey[]]
-  , defaultValue?: unknown
-  ): unknown
+  tryGetProp(obj: object, path: PropertyKey[], defaultValue?: unknown): unknown
 `, () => {
   describe('empty path', () => {
-    it('throws Error', () => {
+    it('return defaultValue', () => {
       const obj = {
         prop: 'value'
       }
 
-      // @ts-ignore
-      const err = getError(() => tryGetProp(obj, []))
+      const result = tryGetProp(obj, [], null)
 
-      expect(err).toBeInstanceOf(Error)
-      expect(err!.message).toBe('The parameter path cannot be empty')
+      expect(result).toBe(null)
     })
   })
 

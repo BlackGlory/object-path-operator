@@ -1,14 +1,13 @@
 import { getProp } from '@src/get-prop'
 import { getError } from 'return-style'
 
-describe('getProp(obj: object, path: [PropertyKey, ...PropertyKey[]]): unknown', () => {
+describe('getProp(obj: object, path: PropertyKey[]): unknown', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
         prop: 'value'
       }
 
-      // @ts-ignore
       const err = getError(() => getProp(obj, []))
 
       expect(err).toBeInstanceOf(Error)

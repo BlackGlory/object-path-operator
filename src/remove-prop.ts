@@ -1,7 +1,4 @@
-export function removeProp(
-  obj: object
-, path: [PropertyKey, ...PropertyKey[]]
-): boolean {
+export function removeProp(obj: object, path: PropertyKey[]): boolean {
   if (path.length === 0) throw new Error('The parameter path cannot be empty')
 
   const lastIndex = path.length - 1

@@ -1,12 +1,7 @@
 import { trySetProp } from '@src/try-set-prop'
-import { getError } from 'return-style'
 
 describe(`
-  trySetProp(
-    obj: object
-  , path: [PropertyKey, ...PropertyKey[]]
-  , value: unknown
-  ): boolean
+  trySetProp(obj: object, path: PropertyKey[], value: unknown): boolean
 `, () => {
   describe('empty path', () => {
     it('throws Error', () => {
@@ -14,11 +9,9 @@ describe(`
         prop: 'value'
       }
 
-      // @ts-ignore
-      const err = getError(() => trySetProp(obj, [], 'value'))
+      const result = trySetProp(obj, [], 'value')
 
-      expect(err).toBeInstanceOf(Error)
-      expect(err!.message).toBe('The parameter path cannot be empty')
+      expect(result).toBe(false)
     })
   })
 

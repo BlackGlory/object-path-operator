@@ -1,4 +1,4 @@
-export function getProp(obj: object, path: [PropertyKey, ...PropertyKey[]]): unknown {
+export function getProp(obj: object, path: PropertyKey[]): unknown {
   if (path.length === 0) throw new Error('The parameter path cannot be empty')
 
   let temp: any = obj

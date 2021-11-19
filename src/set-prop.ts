@@ -1,8 +1,4 @@
-export function setProp(
-  obj: object
-, path: [PropertyKey, ...PropertyKey[]]
-, value: unknown
-): boolean {
+export function setProp(obj: object, path: PropertyKey[], value: unknown): boolean {
   if (path.length === 0) throw new Error('The parameter path cannot be empty')
 
   const lastIndex = path.length - 1

@@ -1,7 +1,7 @@
 import { setProp } from '@src/set-prop'
 import { getError } from 'return-style'
 
-describe('setProp(obj: object, path: [PropertyKey, PropertyKey[]], value: any): boolean', () => {
+describe('setProp(obj: object, path: PropertyKey[], value: any): boolean', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
