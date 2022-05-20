@@ -25,7 +25,7 @@ getProp(obj, ['key-does-not-exist']) // throw error
 ```
 
 ### tryGetProp
-```
+```ts
 function tryGetProp(obj: object, path: PropertyKey[], defaultValue?: unknown): unknown
 ```
 
