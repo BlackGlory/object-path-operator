@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/BlackGlory/object-path-operator/compare/v5.0.0...v5.1.0) (2022-05-20)
+
+
+### Features
+
+* add propExists, tryPropExists ([61620d7](https://github.com/BlackGlory/object-path-operator/commit/61620d7114c9e038335e0955a14a59012d0c5fd5))
+
 ## [5.0.0](https://github.com/BlackGlory/object-path-operator/compare/v4.0.1...v5.0.0) (2021-11-19)
 
 
