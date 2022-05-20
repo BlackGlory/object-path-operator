@@ -108,3 +108,33 @@ tryRemoveProp(obj, []) // false
 tryRemoveProp(obj, ['key', 0]) // true
 tryRemoveProp(obj, ['key-does-not-exist']) // false
 ```
+
+### propExists
+```ts
+function propExists(obj: object, path: PropertyKey[]): boolean
+```
+
+```ts
+const obj = {
+  key: ['value']
+}
+
+propExists(obj, []) // throw error
+propExists(obj, ['key', 0]) // true
+propExists(obj, ['key-does-not-exist']) // false
+```
+
+### tryPropExists
+```ts
+function tryPropExists(obj: object, path: PropertyKey[]): boolean
+```
+
+```ts
+const obj = {
+  key: ['value]
+}
+
+tryPropExists(obj, []) // false
+tryPropExists(obj, ['key', 0]) // true
+tryPropExists(obj, ['key-does-not-exist']) // false
+```
