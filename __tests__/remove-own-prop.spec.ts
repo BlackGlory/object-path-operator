@@ -1,14 +1,14 @@
-import { getProp } from '@src/get-prop'
+import { removeOwnProp } from '@src/remove-prop'
 import { getError } from 'return-style'
 
-describe('getProp', () => {
+describe('removeOwnProp', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
         prop: 'value'
       }
 
-      const err = getError(() => getProp(obj, []))
+      const err = getError(() => removeOwnProp(obj, []))
 
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toBe('The parameter path cannot be empty')
@@ -17,30 +17,34 @@ describe('getProp', () => {
 
   describe('path exists', () => {
     describe('is an own prop', () => {
-      it('returns the property', () => {
+      it('remove the property', () => {
         const obj = {
           deep: {
             prop: 'value'
           }
         }
 
-        const result = getProp(obj, ['deep', 'prop'])
+        const result = removeOwnProp(obj, ['deep', 'prop'])
 
-        expect(result).toBe('value')
+        expect(result).toBe(true)
+        expect(obj).toStrictEqual({
+          deep: {}
+        })
       })
     })
 
     describe('isnt an own prop', () => {
-      it('returns the property', () => {
+      it('throws Error', () => {
         const obj = Object.create({
           deep: {
             prop: 'value'
           }
         })
 
-        const result = getProp(obj, ['deep', 'prop'])
+        const err = getError(() => removeOwnProp(obj, ['deep', 'prop']))
 
-        expect(result).toBe('value')
+        expect(err).toBeInstanceOf(Error)
+        expect(err!.message).toBe('The path .deep does not exist')
       })
     })
   })
@@ -49,10 +53,10 @@ describe('getProp', () => {
     it('throws Error', () => {
       const obj = {}
 
-      const err = getError(() => getProp(obj, ['deep', 'prop']))
+      const err = getError(() => removeOwnProp(obj, ['prop']))
 
       expect(err).toBeInstanceOf(Error)
-      expect(err!.message).toBe('The path .deep does not exist')
+      expect(err!.message).toBe('The path .prop does not exist')
     })
   })
 })

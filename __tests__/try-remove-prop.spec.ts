@@ -1,8 +1,6 @@
-import { tryRemoveProp } from '@src/try-remove-prop'
+import { tryRemoveProp } from '@src/remove-prop'
 
-describe(`
-  tryRemoveProp(obj: object, path: PropertyKey[]): boolean
-`, () => {
+describe('tryRemoveProp', () => {
   describe('empty path', () => {
     it('return false', () => {
       const obj = {
@@ -16,18 +14,37 @@ describe(`
   })
 
   describe('path exists', () => {
-    it('remove the property', () => {
-      const obj = {
-        deep: {
-          prop: 'value'
+    describe('is an own prop', () => {
+      it('remove the property', () => {
+        const obj = {
+          deep: {
+            prop: 'value'
+          }
         }
-      }
 
-      const result = tryRemoveProp(obj, ['deep', 'prop'])
+        const result = tryRemoveProp(obj, ['deep', 'prop'])
 
-      expect(result).toBe(true)
-      expect(obj).toStrictEqual({
-        deep: {}
+        expect(result).toBe(true)
+        expect(obj).toStrictEqual({
+          deep: {}
+        })
+      })
+    })
+
+    describe('isnt an own prop', () => {
+      it('remove the property', () => {
+        const obj = Object.create({
+          deep: {
+            prop: 'value'
+          }
+        })
+
+        const result = tryRemoveProp(obj, ['deep', 'prop'])
+
+        expect(result).toBe(true)
+        expect(Object.getPrototypeOf(obj)).toStrictEqual({
+          deep: {}
+        })
       })
     })
   })

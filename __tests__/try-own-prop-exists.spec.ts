@@ -1,17 +1,15 @@
-import { propExists } from '@src/prop-exists'
-import { getError } from 'return-style'
+import { tryOwnPropExists } from '@src/prop-exists'
 
-describe('propExists', () => {
+describe('tryOwnPropExists', () => {
   describe('empty path', () => {
-    it('throws Error', () => {
+    it('returns false', () => {
       const obj = {
         prop: 'value'
       }
 
-      const err = getError(() => propExists(obj, []))
+      const result = tryOwnPropExists(obj, [])
 
-      expect(err).toBeInstanceOf(Error)
-      expect(err!.message).toBe('The parameter path cannot be empty')
+      expect(result).toBe(false)
     })
   })
 
@@ -24,23 +22,23 @@ describe('propExists', () => {
           }
         }
 
-        const result = propExists(obj, ['deep', 'prop'])
+        const result = tryOwnPropExists(obj, ['deep', 'prop'])
 
         expect(result).toBe(true)
       })
     })
 
     describe('isnt an own prop', () => {
-      it('returns true', () => {
+      it('returns false', () => {
         const obj = Object.create({
           deep: {
             prop: 'value'
           }
         })
 
-        const result = propExists(obj, ['deep', 'prop'])
+        const result = tryOwnPropExists(obj, ['deep', 'prop'])
 
-        expect(result).toBe(true)
+        expect(result).toBe(false)
       })
     })
   })
@@ -49,7 +47,7 @@ describe('propExists', () => {
     it('returns false', () => {
       const obj = {}
 
-      const result = propExists(obj, ['deep', 'prop'])
+      const result = tryOwnPropExists(obj, ['deep', 'prop'])
 
       expect(result).toBe(false)
     })

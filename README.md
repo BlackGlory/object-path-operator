@@ -39,6 +39,16 @@ tryGetProp(obj, ['key', 0]) // value
 tryGetProp(obj, ['key-does-not-exist']) // undefined
 ```
 
+### getOwnProp
+```ts
+function getOwnProp(obj: object, path: PropertyKey[]): unknown
+```
+
+### tryGetOwnProp
+```ts
+function tryGetOwnProp(obj: object, path: PropertyKey[], defaultValue?: unknown): unknown
+```
+
 ### setProp
 ```ts
 function setProp(obj: object, path: PropertyKey[], value: unknown): boolean
@@ -77,6 +87,16 @@ trySetProp(obj, ['newKey'], 'new-value') // true
 trySetProp(obj, ['path', 'does', 'not', 'exist'], 'new-value') // false
 ```
 
+### setOwnProp
+```ts
+function setOwnProp(obj: object, path: PropertyKey[], value: unknown): boolean
+```
+
+### trySetOwnProp
+```ts
+function trySetOwnProp(obj: object, path: PropertyKey[], value: unknown): boolean
+```
+
 ### removeProp
 ```ts
 function removeProp(obj: object, path: PropertyKey[]): boolean
@@ -109,6 +129,16 @@ tryRemoveProp(obj, ['key', 0]) // true
 tryRemoveProp(obj, ['key-does-not-exist']) // false
 ```
 
+### removeOwnProp
+```ts
+function removeOwnProp(obj: object, path: PropertyKey[]): boolean
+```
+
+### tryRemoveOwnProp
+```ts
+function tryRemoveOwnProp(obj: object, path: PropertyKey[]): boolean
+```
+
 ### propExists
 ```ts
 function propExists(obj: object, path: PropertyKey[]): boolean
@@ -137,4 +167,14 @@ const obj = {
 tryPropExists(obj, []) // false
 tryPropExists(obj, ['key', 0]) // true
 tryPropExists(obj, ['key-does-not-exist']) // false
+```
+
+### ownPropExists
+```ts
+function ownPropExists(obj: object, path: PropertyKey[]): boolean
+```
+
+### tryOwnPropExists
+```ts
+function tryOwnPropExists(obj: object, path: PropertyKey[]): boolean
 ```

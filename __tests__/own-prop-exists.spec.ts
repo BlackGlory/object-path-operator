@@ -1,14 +1,14 @@
-import { getProp } from '@src/get-prop'
+import { ownPropExists } from '@src/prop-exists'
 import { getError } from 'return-style'
 
-describe('getProp', () => {
+describe('ownPropExists', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
         prop: 'value'
       }
 
-      const err = getError(() => getProp(obj, []))
+      const err = getError(() => ownPropExists(obj, []))
 
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toBe('The parameter path cannot be empty')
@@ -17,42 +17,41 @@ describe('getProp', () => {
 
   describe('path exists', () => {
     describe('is an own prop', () => {
-      it('returns the property', () => {
+      it('returns true', () => {
         const obj = {
           deep: {
             prop: 'value'
           }
         }
 
-        const result = getProp(obj, ['deep', 'prop'])
+        const result = ownPropExists(obj, ['deep', 'prop'])
 
-        expect(result).toBe('value')
+        expect(result).toBe(true)
       })
     })
 
     describe('isnt an own prop', () => {
-      it('returns the property', () => {
+      it('returns false', () => {
         const obj = Object.create({
           deep: {
             prop: 'value'
           }
         })
 
-        const result = getProp(obj, ['deep', 'prop'])
+        const result = ownPropExists(obj, ['deep', 'prop'])
 
-        expect(result).toBe('value')
+        expect(result).toBe(false)
       })
     })
   })
 
   describe('path does not exist', () => {
-    it('throws Error', () => {
+    it('returns false', () => {
       const obj = {}
 
-      const err = getError(() => getProp(obj, ['deep', 'prop']))
+      const result = ownPropExists(obj, ['deep', 'prop'])
 
-      expect(err).toBeInstanceOf(Error)
-      expect(err!.message).toBe('The path .deep does not exist')
+      expect(result).toBe(false)
     })
   })
 })

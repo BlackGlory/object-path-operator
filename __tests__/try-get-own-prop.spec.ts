@@ -1,13 +1,13 @@
-import { tryGetProp } from '@src/get-prop'
+import { tryGetOwnProp } from '@src/get-prop'
 
-describe('tryGetProp', () => {
+describe('tryGetOwnProp', () => {
   describe('empty path', () => {
     it('return defaultValue', () => {
       const obj = {
         prop: 'value'
       }
 
-      const result = tryGetProp(obj, [], null)
+      const result = tryGetOwnProp(obj, [], null)
 
       expect(result).toBe(null)
     })
@@ -22,23 +22,23 @@ describe('tryGetProp', () => {
           }
         }
 
-        const result = tryGetProp(obj, ['deep', 'prop'])
+        const result = tryGetOwnProp(obj, ['deep', 'prop'])
 
         expect(result).toBe('value')
       })
     })
 
     describe('isnt an own prop', () => {
-      it('returns the property', () => {
+      it('return defaultValue', () => {
         const obj = Object.create({
           deep: {
             prop: 'value'
           }
         })
 
-        const result = tryGetProp(obj, ['deep', 'prop'])
+        const result = tryGetOwnProp(obj, ['deep', 'prop'], null)
 
-        expect(result).toBe('value')
+        expect(result).toBe(null)
       })
     })
   })
@@ -47,7 +47,7 @@ describe('tryGetProp', () => {
     it('return defaultValue', () => {
       const obj = {}
 
-      const result = tryGetProp(obj, ['deep', 'prop'], null)
+      const result = tryGetOwnProp(obj, ['deep', 'prop'], null)
 
       expect(result).toBe(null)
     })

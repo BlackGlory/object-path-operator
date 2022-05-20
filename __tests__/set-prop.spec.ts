@@ -1,14 +1,13 @@
 import { setProp } from '@src/set-prop'
 import { getError } from 'return-style'
 
-describe('setProp(obj: object, path: PropertyKey[], value: any): boolean', () => {
+describe('setProp', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
         prop: 'value'
       }
 
-      // @ts-ignore
       const err = getError(() => setProp(obj, [], 'value'))
 
       expect(err).toBeInstanceOf(Error)
@@ -17,20 +16,41 @@ describe('setProp(obj: object, path: PropertyKey[], value: any): boolean', () =>
   })
 
   describe('path exists', () => {
-    it('set the property', () => {
-      const obj = {
-        deep: {
-          prop: 'value'
+    describe('is an own prop', () => {
+      it('set the property', () => {
+        const obj = {
+          deep: {
+            prop: 'value'
+          }
         }
-      }
 
-      const result = setProp(obj, ['deep', 'prop'], 'new-value')
+        const result = setProp(obj, ['deep', 'prop'], 'new-value')
 
-      expect(result).toBe(true)
-      expect(obj).toStrictEqual({
-        deep: {
-          prop: 'new-value'
-        }
+        expect(result).toBe(true)
+        expect(obj).toStrictEqual({
+          deep: {
+            prop: 'new-value'
+          }
+        })
+      })
+    })
+
+    describe('isnt an own prop', () => {
+      it('set the property', () => {
+        const obj = Object.create({
+          deep: {
+            prop: 'value'
+          }
+        })
+
+        const result = setProp(obj, ['deep', 'prop'], 'new-value')
+
+        expect(result).toBe(true)
+        expect(Object.getPrototypeOf(obj)).toStrictEqual({
+          deep: {
+            prop: 'new-value'
+          }
+        })
       })
     })
   })

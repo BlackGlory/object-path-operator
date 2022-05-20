@@ -8,5 +8,7 @@ module.exports = {
     'eslint:recommended'
   , 'plugin:@typescript-eslint/recommended'
   ]
-, rules: {}
+, rules: {
+    'no-prototype-builtins': 'off'
+  }
 }

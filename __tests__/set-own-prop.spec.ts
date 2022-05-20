@@ -1,15 +1,17 @@
-import { trySetProp } from '@src/set-prop'
+import { setOwnProp } from '@src/set-prop'
+import { getError } from 'return-style'
 
-describe('trySetProp', () => {
+describe('setOwnProp', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
         prop: 'value'
       }
 
-      const result = trySetProp(obj, [], 'value')
+      const err = getError(() => setOwnProp(obj, [], 'value'))
 
-      expect(result).toBe(false)
+      expect(err).toBeInstanceOf(Error)
+      expect(err!.message).toBe('The parameter path cannot be empty')
     })
   })
 
@@ -22,7 +24,7 @@ describe('trySetProp', () => {
           }
         }
 
-        const result = trySetProp(obj, ['deep', 'prop'], 'new-value')
+        const result = setOwnProp(obj, ['deep', 'prop'], 'new-value')
 
         expect(result).toBe(true)
         expect(obj).toStrictEqual({
@@ -34,21 +36,17 @@ describe('trySetProp', () => {
     })
 
     describe('isnt an own prop', () => {
-      it('set the property', () => {
+      it('throws Error', () => {
         const obj = Object.create({
           deep: {
             prop: 'value'
           }
         })
 
-        const result = trySetProp(obj, ['deep', 'prop'], 'new-value')
+        const err = getError(() => setOwnProp(obj, ['deep', 'prop'], 'new-value'))
 
-        expect(result).toBe(true)
-        expect(Object.getPrototypeOf(obj)).toStrictEqual({
-          deep: {
-            prop: 'new-value'
-          }
-        })
+        expect(err).toBeInstanceOf(Error)
+        expect(err!.message).toBe('The path .deep does not exist')
       })
     })
   })
@@ -58,7 +56,7 @@ describe('trySetProp', () => {
       it('set the property', () => {
         const obj = {}
 
-        const result = trySetProp(obj, ['prop'], 'new-value')
+        const result = setOwnProp(obj, ['prop'], 'new-value')
 
         expect(result).toBe(true)
         expect(obj).toStrictEqual({
@@ -68,12 +66,12 @@ describe('trySetProp', () => {
     })
 
     describe('deep path', () => {
-      it('return false', () => {
+      it('throws Error', () => {
         const obj = {}
 
-        const result = trySetProp(obj, ['deep', 'prop'], 'new-value')
+        const err = getError(() => setOwnProp(obj, ['deep', 'prop'], 'new-value'))
 
-        expect(result).toBe(false)
+        expect(err).toBeInstanceOf(Error)
       })
     })
   })

@@ -1,16 +1,47 @@
 export function removeProp(obj: object, path: PropertyKey[]): boolean {
+  return _removeProp(obj, path, (obj, prop) => prop in obj)
+}
+
+export function tryRemoveProp(obj: object, path: PropertyKey[]): boolean { 
+  try {
+    return removeProp(obj, path)
+  } catch {
+    return false
+  }
+}
+
+export function removeOwnProp(obj: object, path: PropertyKey[]): boolean {
+  return _removeProp(obj, path, (obj, prop) => obj.hasOwnProperty(prop))
+}
+
+export function tryRemoveOwnProp(obj: object, path: PropertyKey[]): boolean { 
+  try {
+    return removeOwnProp(obj, path)
+  } catch {
+    return false
+  }
+}
+
+function _removeProp(
+  obj: object
+, path: PropertyKey[]
+, exists: (
+    obj: Record<string | symbol | number, unknown>
+  , prop: PropertyKey
+  ) => boolean
+) {
   if (path.length === 0) throw new Error('The parameter path cannot be empty')
 
   const lastIndex = path.length - 1
   let temp: any = obj
   for (let i = 0; i < path.length; i++) {
-    const key = path[i]
+    const prop = path[i]
 
-    if (key in temp) {
+    if (exists(temp, prop)) {
       if (i === lastIndex) {
-        return Reflect.deleteProperty(temp, key)
+        return Reflect.deleteProperty(temp, prop)
       } else {
-        temp = temp[key]
+        temp = temp[prop]
       }
     } else {
       const failedPath = path.slice(0, i + 1)

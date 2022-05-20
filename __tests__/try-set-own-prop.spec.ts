@@ -1,13 +1,13 @@
-import { trySetProp } from '@src/set-prop'
+import { trySetOwnProp } from '@src/set-prop'
 
-describe('trySetProp', () => {
+describe('trySetOwnProp', () => {
   describe('empty path', () => {
     it('throws Error', () => {
       const obj = {
         prop: 'value'
       }
 
-      const result = trySetProp(obj, [], 'value')
+      const result = trySetOwnProp(obj, [], 'value')
 
       expect(result).toBe(false)
     })
@@ -22,7 +22,7 @@ describe('trySetProp', () => {
           }
         }
 
-        const result = trySetProp(obj, ['deep', 'prop'], 'new-value')
+        const result = trySetOwnProp(obj, ['deep', 'prop'], 'new-value')
 
         expect(result).toBe(true)
         expect(obj).toStrictEqual({
@@ -41,14 +41,9 @@ describe('trySetProp', () => {
           }
         })
 
-        const result = trySetProp(obj, ['deep', 'prop'], 'new-value')
+        const result = trySetOwnProp(obj, ['deep', 'prop'], 'new-value')
 
-        expect(result).toBe(true)
-        expect(Object.getPrototypeOf(obj)).toStrictEqual({
-          deep: {
-            prop: 'new-value'
-          }
-        })
+        expect(result).toBe(false)
       })
     })
   })
@@ -58,7 +53,7 @@ describe('trySetProp', () => {
       it('set the property', () => {
         const obj = {}
 
-        const result = trySetProp(obj, ['prop'], 'new-value')
+        const result = trySetOwnProp(obj, ['prop'], 'new-value')
 
         expect(result).toBe(true)
         expect(obj).toStrictEqual({
@@ -71,7 +66,7 @@ describe('trySetProp', () => {
       it('return false', () => {
         const obj = {}
 
-        const result = trySetProp(obj, ['deep', 'prop'], 'new-value')
+        const result = trySetOwnProp(obj, ['deep', 'prop'], 'new-value')
 
         expect(result).toBe(false)
       })
