@@ -11,7 +11,7 @@ export function tryRemoveProp(obj: object, path: PropertyKey[]): boolean {
 }
 
 export function removeOwnProp(obj: object, path: PropertyKey[]): boolean {
-  return _removeProp(obj, path, (obj, prop) => obj.hasOwnProperty(prop))
+  return _removeProp(obj, path, (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop))
 }
 
 export function tryRemoveOwnProp(obj: object, path: PropertyKey[]): boolean { 

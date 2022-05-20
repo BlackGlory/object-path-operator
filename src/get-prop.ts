@@ -11,7 +11,7 @@ export function tryGetProp(obj: object, path: PropertyKey[], defaultValue?: unkn
 }
 
 export function getOwnProp(obj: object, path: PropertyKey[]): unknown {
-  return _getProp(obj, path, (obj, prop) => obj.hasOwnProperty(prop))
+  return _getProp(obj, path, (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop))
 }
 
 export function tryGetOwnProp(obj: object, path: PropertyKey[], defaultValue?: unknown): unknown {

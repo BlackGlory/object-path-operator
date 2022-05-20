@@ -11,7 +11,7 @@ export function trySetProp(obj: object, path: PropertyKey[], value: unknown): bo
 }
 
 export function setOwnProp(obj: object, path: PropertyKey[], value: unknown): boolean {
-  return _setProp(obj, path, value, (obj, prop) => obj.hasOwnProperty(prop))
+  return _setProp(obj, path, value, (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop))
 }
 
 export function trySetOwnProp(obj: object, path: PropertyKey[], value: unknown): boolean {

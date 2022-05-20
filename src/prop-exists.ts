@@ -11,7 +11,7 @@ export function tryPropExists(obj: object, path: PropertyKey[]): boolean {
 }
 
 export function ownPropExists(obj: object, path: PropertyKey[]): boolean {
-  return _propExists(obj, path, (obj, prop) => obj.hasOwnProperty(prop))
+  return _propExists(obj, path, (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop))
 }
 
 export function tryOwnPropExists(obj: object, path: PropertyKey[]): boolean {
